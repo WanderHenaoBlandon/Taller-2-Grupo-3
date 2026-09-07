@@ -1,3 +1,4 @@
 Taller de sistemas de control de versiones
 Autor: Alexander Camelo Maya
 Linea de estado: version inicial en main
+Linea de estado: conflicto generado desde main
