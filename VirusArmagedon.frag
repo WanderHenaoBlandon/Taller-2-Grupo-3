@@ -1,5 +1,7 @@
 precision mediump float;
 
+// GitHub: WanderHenaoBlandon
+
 uniform vec2 u_resolution;
 
 void main() {
