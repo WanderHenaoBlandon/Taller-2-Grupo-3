@@ -1,12 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Taller Git</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simple</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f4f7fb;
+            --panel: #ffffff;
+            --text: #1f2937;
+            --accent: #0f766e;
+            --accent-hover: #115e59;
+            --border: #d1d5db;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #dbeafe, #f0fdf4);
+            color: var(--text);
+        }
+
+        .calculator {
+            width: min(92vw, 360px);
+            padding: 24px;
+            border-radius: 16px;
+            background: var(--panel);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .field {
+            display: grid;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        label {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        button {
+            border: none;
+            background: var(--accent);
+            color: #ffffff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+        }
+
+        .result {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 10px;
+            background: #ecfeff;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
-  <h1>Titulo integrado de main y develop</h1>
+    <main class="calculator">
+        <h1>Calculadora Simple</h1>
+
+        <div class="field">
+            <label for="firstNumber">Primer numero</label>
+            <input id="firstNumber" type="number" placeholder="Ejemplo: 10">
+        </div>
+
+        <div class="field">
+            <label for="operation">Operacion</label>
+            <select id="operation">
+                <option value="add">Sumar (+)</option>
+                <option value="subtract">Restar (-)</option>
+                <option value="multiply">Multiplicar (×)</option>
+                <option value="divide">Dividir (÷)</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="secondNumber">Segundo numero</label>
+            <input id="secondNumber" type="number" placeholder="Ejemplo: 5">
+        </div>
+
+        <button id="calculateButton" type="button">Calcular</button>
+
+        <p class="result" id="result">Resultado: 0</p>
+    </main>
+
+    <script>
+        const firstNumberInput = document.getElementById("firstNumber");
+        const secondNumberInput = document.getElementById("secondNumber");
+        const operationSelect = document.getElementById("operation");
+        const resultElement = document.getElementById("result");
+        const calculateButton = document.getElementById("calculateButton");
+
+        calculateButton.addEventListener("click", () => {
+            const firstNumber = Number(firstNumberInput.value);
+            const secondNumber = Number(secondNumberInput.value);
+
+            if (Number.isNaN(firstNumber) || Number.isNaN(secondNumber)) {
+                resultElement.textContent = "Resultado: ingresa dos numeros validos.";
+                return;
+            }
+
+            let result;
+
+            switch (operationSelect.value) {
+                case "add":
+                    result = firstNumber + secondNumber;
+                    break;
+                case "subtract":
+                    result = firstNumber - secondNumber;
+                    break;
+                case "multiply":
+                    result = firstNumber * secondNumber;
+                    break;
+                case "divide":
+                    if (secondNumber === 0) {
+                        resultElement.textContent = "Resultado: no se puede dividir entre cero.";
+                        return;
+                    }
+                    result = firstNumber / secondNumber;
+                    break;
+                default:
+                    resultElement.textContent = "Resultado: operacion no valida.";
+                    return;
+            }
+
+            resultElement.textContent = `Resultado: ${result}`;
+        });
+    </script>
 </body>
 </html>
-  
-  
