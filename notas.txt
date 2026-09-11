@@ -5,3 +5,4 @@ Linea de estado: conflicto generado desde develop
 Linea de estado: conflicto generado desde main
 Linea de estado: conflicto resuelto integrando main y develop
 Linea de estado: conflicto generado desde develop
+Linea de jesus aprendiendo a subir commit
