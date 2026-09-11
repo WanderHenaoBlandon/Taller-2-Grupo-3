@@ -1,1 +1,3 @@
-Mi primer remoto 
+Mi primer remoto
+Creacion de la pagina 
+Ingresando base de datos
