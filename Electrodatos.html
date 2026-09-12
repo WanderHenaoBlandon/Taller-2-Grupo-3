@@ -19,6 +19,8 @@
 		.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.2rem; }
 		.card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px #0f766e18; }
 		.card span { font-size: 2rem; }
+		.contact-card h3 { margin: 0; }
+		.contact-card p { margin: .35rem 0; }
 		footer { text-align: center; padding: 1.5rem; background: var(--dark); color: white; }
 		@media (max-width: 600px) { header { display: block; text-align: center; } nav a { display: inline-block; margin: .6rem .4rem 0; } }
 	</style>
@@ -46,7 +48,24 @@
 		</div>
 	</main>
 
+	<section id="contactos">
+		<h2>Contactos</h2>
+		<div class="cards" id="lista-contactos"></div>
+	</section>
+
 	<footer id="contacto">© 2026 ElectroDatos · Aprende, experimenta y crea</footer>
-	<script type="module" src="Datos.js"></script>
+	<script type="module">
+		import contactos from './Datos.js';
+
+		const listaContactos = document.querySelector('#lista-contactos');
+		listaContactos.innerHTML = contactos.map(contacto => `
+			<article class="card contact-card">
+				<h3>${contacto.nombre}</h3>
+				<p><strong>Empresa:</strong> ${contacto.empresa}</p>
+				<p><strong>Teléfono:</strong> ${contacto.telefono}</p>
+				<p><strong>Email:</strong> ${contacto.email}</p>
+			</article>
+		`).join('');
+	</script>
 </body>
 </html>
