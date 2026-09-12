@@ -2,4 +2,4 @@ Taller de sistemas de control de versiones
 Autor: Alexander Camelo Maya
 Linea de estado: version inicial en main
 Linea de estado: conflicto resuelto integrando main y develop
-
+Linea de estado: conflicto solucionado en remoto
