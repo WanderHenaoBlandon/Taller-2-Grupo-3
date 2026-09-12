@@ -21,6 +21,11 @@
 		.card span { font-size: 2rem; }
 		.contact-card h3 { margin: 0; }
 		.contact-card p { margin: .35rem 0; }
+		.contact-form { background: white; padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px #0f766e18; }
+		.contact-form label { display: block; margin-top: .8rem; font-weight: bold; }
+		.contact-form input { width: 100%; padding: .7rem; margin-top: .3rem; border: 1px solid #cbd5e1; border-radius: 6px; font: inherit; }
+		.contact-form button { margin-top: 1rem; border: 0; cursor: pointer; }
+		#mensaje-contacto { margin: .8rem 0 0; color: var(--primary); font-weight: bold; }
 		footer { text-align: center; padding: 1.5rem; background: var(--dark); color: white; }
 		@media (max-width: 600px) { header { display: block; text-align: center; } nav a { display: inline-block; margin: .6rem .4rem 0; } }
 	</style>
@@ -50,6 +55,18 @@
 
 	<section id="contactos">
 		<h2>Contactos</h2>
+		<form class="contact-form" id="formulario-contacto">
+			<label for="nombre">Nombre</label>
+			<input id="nombre" name="nombre" type="text" required>
+			<label for="telefono">Teléfono</label>
+			<input id="telefono" name="telefono" type="tel" required>
+			<label for="email">Email</label>
+			<input id="email" name="email" type="email" required>
+			<label for="empresa">Empresa</label>
+			<input id="empresa" name="empresa" type="text" required>
+			<button class="button" type="submit">Agregar contacto</button>
+			<p id="mensaje-contacto" aria-live="polite"></p>
+		</form>
 		<div class="cards" id="lista-contactos"></div>
 	</section>
 
@@ -58,14 +75,38 @@
 		import contactos from './Datos.js';
 
 		const listaContactos = document.querySelector('#lista-contactos');
-		listaContactos.innerHTML = contactos.map(contacto => `
-			<article class="card contact-card">
-				<h3>${contacto.nombre}</h3>
-				<p><strong>Empresa:</strong> ${contacto.empresa}</p>
-				<p><strong>Teléfono:</strong> ${contacto.telefono}</p>
-				<p><strong>Email:</strong> ${contacto.email}</p>
-			</article>
-		`).join('');
+		const formularioContacto = document.querySelector('#formulario-contacto');
+		const mensajeContacto = document.querySelector('#mensaje-contacto');
+
+		function mostrarContactos() {
+			listaContactos.innerHTML = contactos.map(contacto => `
+				<article class="card contact-card">
+					<h3>${contacto.nombre}</h3>
+					<p><strong>Empresa:</strong> ${contacto.empresa}</p>
+					<p><strong>Teléfono:</strong> ${contacto.telefono}</p>
+					<p><strong>Email:</strong> ${contacto.email}</p>
+				</article>
+			`).join('');
+		}
+
+		mostrarContactos();
+
+		formularioContacto.addEventListener('submit', evento => {
+			evento.preventDefault();
+			const datosFormulario = new FormData(formularioContacto);
+
+			contactos.push({
+				id: contactos.length + 1,
+				nombre: datosFormulario.get('nombre'),
+				telefono: datosFormulario.get('telefono'),
+				email: datosFormulario.get('email'),
+				empresa: datosFormulario.get('empresa')
+			});
+
+			mostrarContactos();
+			formularioContacto.reset();
+			mensajeContacto.textContent = 'Contacto agregado correctamente.';
+		});
 	</script>
 </body>
 </html>
